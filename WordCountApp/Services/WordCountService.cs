@@ -60,12 +60,11 @@ namespace WordCountApp.Services
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task UploadToS3Async(WordCountResult wordCountResult, string fileNameWithoutExtension)
         {
-            var json = JsonConvert.SerializeObject(wordCountResult);
-            var key = $"{_keyPrefix}{fileNameWithoutExtension}.json";
             try
             {
+                var key = $"{_keyPrefix}{fileNameWithoutExtension}.json";
                 string wordCountResultJson = JsonConvert.SerializeObject(wordCountResult);
-
+                
                 var putRequest = new PutObjectRequest
                 {
                     BucketName = _bucketName,
